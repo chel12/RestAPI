@@ -1,8 +1,10 @@
 import http from 'http';
 
 const server = http.createServer((req, res) => {
-	//хост достать
+
+	//сделать урлу и хост достать
 	const url = new URL(req.url, `http://${req.headers.host}`);
+
 	//взять путь
 	const { pathname } = url;
 
@@ -16,7 +18,9 @@ const server = http.createServer((req, res) => {
 		res.end('Not found');
 	}
 });
+
 const port = 3000;
+
 server.listen(port, () => {
 	console.log(`Server run at http://localhost:${port}`);
 });
