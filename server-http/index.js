@@ -1,7 +1,7 @@
 import http from 'http';
+import { getItems } from './controllers/itemController.js';
 
-const server = http.createServer((req, res) => {
-
+const server = http.createServer(async (req, res) => {
 	//сделать урлу и хост достать
 	const url = new URL(req.url, `http://${req.headers.host}`);
 
@@ -9,13 +9,19 @@ const server = http.createServer((req, res) => {
 	const { pathname } = url;
 
 	//логика
-	if (req.method === 'GET' && pathname === '/hello-world') {
-		//если метод из запроса = GET и путь '//hello-world'
-		//тогда отправь строку....
-		res.end('<h1>Hello world </h1>');
+	// if (req.method === 'GET' && pathname === '/hello-world') {
+	// 	//если метод из запроса = GET и путь '//hello-world'
+	// 	//тогда отправь строку....
+	// 	res.end('<h1>Hello world </h1>');
+	// } else {
+	// 	res.statusCode = 404;
+	// 	res.end('Not found');
+	// }
+	if (req.method === 'GET' && pathname === '/items') {
+		await getItems();
 	} else {
 		res.statusCode = 404;
-		res.end('Not found');
+		res.end('Not Found');
 	}
 });
 

@@ -8,13 +8,13 @@ export const itemModel = {
 		return new Promise((resolve, reject) => {
 			//обращение к базе данных
 			//sql запрос (1 всё 2 массив 3 функция(ошибка и rows то что нашли))
-			db.all('SELECT * FROM items',[],(err, rows)=>{
-				if (err){
-					reject(err)
+			db.all('SELECT * FROM items', [], (err, rows) => {
+				if (err) {
+					reject(err);
 				} else {
-					resolve(rows)
+					resolve(rows);
 				}
-			})
+			});
 		});
 		//далее потребуется контроллеры
 	},

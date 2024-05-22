@@ -18,6 +18,6 @@ db.serialize(() => {
 	//и создаём таблицу тут
 	//таблица items и в скобках столбцы
 	//id INTEGER-число PRIMARY KEY-первичный ключ AUTOINCREMENT-авто увелечение
-	db.run(`CREATE TABLE IF NOT EXIST items (id INTEGER PRIMARY KEY AUTOINCREMENT,
+	db.run(`CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL, description TEXT)`);
 });
