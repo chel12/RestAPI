@@ -4,10 +4,8 @@ import { getItems } from './controllers/itemController.js';
 const server = http.createServer(async (req, res) => {
 	//сделать урлу и хост достать
 	const url = new URL(req.url, `http://${req.headers.host}`);
-
 	//взять путь
 	const { pathname } = url;
-
 	//логика
 	// if (req.method === 'GET' && pathname === '/hello-world') {
 	// 	//если метод из запроса = GET и путь '//hello-world'
@@ -18,13 +16,12 @@ const server = http.createServer(async (req, res) => {
 	// 	res.end('Not found');
 	// }
 	if (req.method === 'GET' && pathname === '/items') {
-		await getItems();
+		await getItems(req, res);
 	} else {
 		res.statusCode = 404;
 		res.end('Not Found');
 	}
 });
-
 const port = 3000;
 
 server.listen(port, () => {

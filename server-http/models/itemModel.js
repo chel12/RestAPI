@@ -18,4 +18,36 @@ export const itemModel = {
 		});
 		//далее потребуется контроллеры
 	},
+	//получение по id
+	getItemById: function (id) {
+		return new Promise((resolve, reject) => {
+			//без интерполяции ` чтобы обезопасить от sql иньекций
+			//получитьИзБд.ВыбратьИЗтаблицыАйтемс,Где id? [подставится сюда], ответ rows
+			db.get('SELECT * FROM items WHERE id=?', [id], (err, row) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(row);
+				}
+			});
+		});
+	},
+	//добавление
+	//с клиента приходит JSON
+	createItem: function (item) {
+		return new Promise((resolve, reject) => {
+			// запрос к БД и вставка в БД
+			db.run(
+				'INSERT INTO items(name,description) VALUES(?,?)',
+				[item.name, item.description],
+				(err) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(this.lastID);
+					}
+				}
+			);
+		});
+	},
 };
