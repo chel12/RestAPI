@@ -58,3 +58,22 @@ export const createItem = async (req, res) => {
 		res.end(`Error: ${err.message}`);
 	}
 };
+
+export const updateItem = async (req, res, id) => {
+	try {
+		let body = '';
+		req.on('data', (chunk) => {
+			body += chunk.toString();
+		});
+		req.on('end', async () => {
+			const item = JSON.parse(body);
+			await itemModel.updateItem(id, item);
+			res.statusCode = 200;
+			res.setHeader('Content-type', 'application/json');
+			res.end(JSON.stringify('Обновлено'));
+		});
+	} catch (err) {
+		res.statusCode = 500;
+		res.end(`Error: ${err.message}`);
+	}
+};

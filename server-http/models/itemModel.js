@@ -57,7 +57,7 @@ export const itemModel = {
 			// запрос к БД и update
 			db.run(
 				'UPDATE items SET name=?, description=? WHERE id=?',
-				[item, item.name, item.description, item.id],
+				[item.name, item.description, id],
 				(err) => {
 					if (err) {
 						reject(err);
