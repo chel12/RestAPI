@@ -1,6 +1,7 @@
 import http from 'http';
 import {
 	createItem,
+	deleteItem,
 	getItemById,
 	getItems,
 	updateItem,
@@ -30,6 +31,10 @@ const server = http.createServer(async (req, res) => {
 	} else if (req.method === 'PUT' && pathname.startsWith('/items/')) {
 		const id = pathname.split('/')[2];
 		await updateItem(req, res, id);
+	} else if (req.method === 'DELETE' && pathname.startsWith('/items/')) {
+		//split разбивает строку в массив и берём 2 индекс массива это id
+		const id = pathname.split('/')[2];
+		await deleteItem(req, res, id);
 	} else {
 		res.statusCode = 404;
 		res.end('Not Found');

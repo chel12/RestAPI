@@ -77,3 +77,15 @@ export const updateItem = async (req, res, id) => {
 		res.end(`Error: ${err.message}`);
 	}
 };
+
+export const deleteItem = async (req, res, id) => {
+	try {
+		await itemModel.deleteItem(id);
+		res.statusCode = 200;
+		res.setHeader('Content-type', 'application/json');
+		res.end(JSON.stringify('Удалено'));
+	} catch (err) {
+		res.statusCode = 500;
+		res.end(`Error: ${err.message}`);
+	}
+};
