@@ -50,4 +50,36 @@ export const itemModel = {
 			);
 		});
 	},
+	//обновить item
+	//(кого обновить , на что обновить)
+	updateItem: function (id, item) {
+		return new Promise((resolve, reject) => {
+			// запрос к БД и update
+			db.run(
+				'UPDATE items SET name=?, description=? WHERE id=?',
+				[item, item.name, item.description, item.id],
+				(err) => {
+					if (err) {
+						reject(err);
+					} else {
+						//обращение к переменной где произошли изменения
+						resolve(this.changes);
+					}
+				}
+			);
+		});
+	},
+	deleteItem: function (id) {
+		return new Promise((resolve, reject) => {
+			// запрос к БД и update
+			db.run('DELETE FROM items WHERE id=?', [id], (err) => {
+				if (err) {
+					reject(err);
+				} else {
+					//обращение к переменной где произошли изменения
+					resolve(this.changes);
+				}
+			});
+		});
+	},
 };
