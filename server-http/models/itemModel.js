@@ -23,11 +23,11 @@ export const itemModel = {
 		return new Promise((resolve, reject) => {
 			//без интерполяции ` чтобы обезопасить от sql иньекций
 			//получитьИзБд.ВыбратьИЗтаблицыАйтемс,Где id? [подставится сюда], ответ rows
-			db.get('SELECT * FROM items WHERE id=?', [id], (err, row) => {
+			db.get('SELECT * FROM items WHERE id=?', [id], (err, rows) => {
 				if (err) {
 					reject(err);
 				} else {
-					resolve(row);
+					resolve(rows);
 				}
 			});
 		});
@@ -44,7 +44,7 @@ export const itemModel = {
 					if (err) {
 						reject(err);
 					} else {
-						resolve(this.lastID);
+						resolve(this.changes);
 					}
 				}
 			);
